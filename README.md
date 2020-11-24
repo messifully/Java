@@ -1,7 +1,293 @@
-[TOC]
 
-
-
+- [**Linux**](#linux)
+    - [Java开发环境](#java开发环境)
+      - [**JDK**](#jdk)
+      - [**Tomcat**](#tomcat)
+      - [Mysql](#mysql)
+      - [apt更换源](#apt更换源)
+    - [常用命令](#常用命令)
+      - [文件管理](#文件管理)
+      - [服务篇](#服务篇)
+        - [ip](#ip)
+        - [mysql](#mysql-1)
+        - [tomcat](#tomcat-1)
+      - [工具](#工具)
+        - [vim](#vim)
+    - [运维问题](#运维问题)
+    - [Mysql调优](#mysql调优)
+- [Spring](#spring)
+  - [IOC容器](#ioc容器)
+  - [**AOP**](#aop)
+- [SpringMVC](#springmvc)
+- [SpringBoot](#springboot)
+    - [整合其他框架](#整合其他框架)
+      - [ElasticSearch](#elasticsearch)
+    - [Spring Data JPA](#spring-data-jpa)
+      - [Repository 接口](#repository-接口)
+- [MyBatis](#mybatis)
+- [MySql](#mysql-2)
+  - [存储引擎](#存储引擎)
+    - [InnoDB](#innodb)
+      - [InnoDB 内存架构](#innodb-内存架构)
+      - [InnoDB 磁盘架构](#innodb-磁盘架构)
+    - [MyISAM](#myisam)
+    - [InnoDB 和 MyISAM 的比较](#innodb-和-myisam-的比较)
+  - [日志系统](#日志系统)
+    - [**重做日志（redo log）**](#重做日志redo-log)
+      - [**脏数据刷盘**](#脏数据刷盘)
+      - [**脏日志刷盘**](#脏日志刷盘)
+      - [日志刷盘的规则](#日志刷盘的规则)
+      - [数据页刷盘的规则及checkpoint](#数据页刷盘的规则及checkpoint)
+    - [**二进制日志（`binlog`）**](#二进制日志binlog)
+    - [**回滚日志（```undo log```）**](#回滚日志undo-log)
+  - [索引](#索引)
+    - [背景](#背景)
+      - [磁盘IO和预读](#磁盘io和预读)
+      - [索引是什么？](#索引是什么)
+    - [BTree索引](#btree索引)
+    - [B+Tree索引](#btree索引-1)
+    - [B+ Tree 原理](#b-tree-原理)
+      - [数据结构](#数据结构)
+      - [操作](#操作)
+      - [树的常见特性](#树的常见特性)
+      - [B + 树与红黑树的比较](#b--树与红黑树的比较)
+      - [B + 树与 B 树的比较](#b--树与-b-树的比较)
+    - [MySQL 索引](#mysql-索引)
+      - [B+ Tree 索引](#b-tree-索引)
+      - [哈希索引](#哈希索引)
+      - [全文索引](#全文索引)
+      - [空间数据索引](#空间数据索引)
+    - [索引的优点](#索引的优点)
+    - [索引的使用条件](#索引的使用条件)
+    - [如何合理创建索引](#如何合理创建索引)
+      - [索引不生效的原因](#索引不生效的原因)
+      - [无法避免对索引列使用函数，怎么使用索引](#无法避免对索引列使用函数怎么使用索引)
+        - [前缀索引与索引选择性](#前缀索引与索引选择性)
+      - [索引设计准则：三星索引](#索引设计准则三星索引)
+  - [Mysql调优](#mysql调优-1)
+    - [**Explain**](#explain)
+        - [**排除缓存干扰**](#排除缓存干扰)
+        - [**Explain**](#explain-1)
+        - [**覆盖索引**](#覆盖索引)
+        - [联合索引](#联合索引)
+        - [最左匹配原则](#最左匹配原则)
+        - [索引下推](#索引下推)
+        - [唯一索引普通索引选择难题](#唯一索引普通索引选择难题)
+        - [前缀索引](#前缀索引)
+        - [条件字段函数操作](#条件字段函数操作)
+        - [隐式类型转换](#隐式类型转换)
+        - [隐式字符编码转换](#隐式字符编码转换)
+        - [总结](#总结)
+    - [查询性能优化](#查询性能优化)
+      - [合理创建索引](#合理创建索引)
+        - [独立的列](#独立的列)
+        - [多列索引](#多列索引)
+        - [索引列的顺序](#索引列的顺序)
+      - [使用 explain 分析 select 查询语句](#使用-explain-分析-select-查询语句)
+      - [优化数据访问](#优化数据访问)
+        - [减少请求的数据量](#减少请求的数据量)
+        - [减少服务器端扫描的行数](#减少服务器端扫描的行数)
+      - [重构查询方式](#重构查询方式)
+        - [切分大查询](#切分大查询)
+        - [分解大连接查询](#分解大连接查询)
+  - [事务](#事务)
+    - [ACID](#acid)
+    - [ACID 之间的关系](#acid-之间的关系)
+    - [隔离问题](#隔离问题)
+    - [隔离级别](#隔离级别)
+    - [Mysql事务的实现](#mysql事务的实现)
+      - [**多版本并发控制（MVCC）**](#多版本并发控制mvcc)
+      - [InnoDB的MVCC实现逻辑](#innodb的mvcc实现逻辑)
+        - [**InnoDB存储引擎保存的MVCC的数据**](#innodb存储引擎保存的mvcc的数据)
+          - [**`undo log`**](#undo-log)
+          - [`ReadView`](#readview)
+        - [`READ COMMITTED` 隔离级别下的``ReadView``](#read-committed-隔离级别下的readview)
+        - [`REPEATABLE READ` 隔离级别下的`ReadView`](#repeatable-read-隔离级别下的readview)
+        - [MVCC总结](#mvcc总结)
+  - [锁](#锁)
+    - [锁类型](#锁类型)
+    - [**粒度锁**](#粒度锁)
+    - [**InnoDB行级锁和表级锁**](#innodb行级锁和表级锁)
+      - [**InnoDB锁模式**](#innodb锁模式)
+      - [**InnoDB加锁方法**](#innodb加锁方法)
+      - [InnoDB 行锁实现方式](#innodb-行锁实现方式)
+      - [**InnoDB的间隙锁**](#innodb的间隙锁)
+      - [**InnoDB 在不同隔离级别下的一致性读及锁的差异：**](#innodb-在不同隔离级别下的一致性读及锁的差异)
+      - [获取 InnoDB 行锁争用情况：](#获取-innodb-行锁争用情况)
+      - [**LOCK TABLES 和 UNLOCK TABLES**](#lock-tables-和-unlock-tables)
+      - [**LOCK TABLES语法**](#lock-tables语法)
+      - [使用LOCK TABLES的场景](#使用lock-tables的场景)
+    - [MVCC](#mvcc)
+      - [基础概念](#基础概念)
+      - [实现过程](#实现过程)
+      - [快照读与当前读](#快照读与当前读)
+    - [锁算法](#锁算法)
+      - [Record Lock](#record-lock)
+      - [Gap Lock](#gap-lock)
+      - [Next-Key Lock](#next-key-lock)
+  - [分库分表数据切分](#分库分表数据切分)
+    - [水平切分](#水平切分)
+    - [垂直切分](#垂直切分)
+    - [Sharding 策略](#sharding-策略)
+    - [Sharding 存在的问题](#sharding-存在的问题)
+  - [复制](#复制)
+    - [主从复制](#主从复制)
+    - [读写分离](#读写分离)
+  - [关系数据库设计理论](#关系数据库设计理论)
+    - [函数依赖](#函数依赖)
+    - [异常](#异常)
+    - [范式](#范式)
+      - [第一范式 (1NF)](#第一范式-1nf)
+      - [第二范式 (2NF)](#第二范式-2nf)
+      - [第三范式 (3NF)](#第三范式-3nf)
+    - [ER 图](#er-图)
+    - [实体的三种联系](#实体的三种联系)
+    - [表示出现多次的关系](#表示出现多次的关系)
+    - [联系的多向性](#联系的多向性)
+    - [表示子类](#表示子类)
+  - [其他使用相关](#其他使用相关)
+    - [JSON](#json)
+      - [JSON_CONTAINS](#json_contains)
+      - [JSON_CONTAINS_PATH](#json_contains_path)
+      - [column->path、column->>path](#column-pathcolumn-path)
+- [Redis](#redis)
+  - [基础](#基础)
+      - [Redis数据结构](#redis数据结构)
+        - [引入及配置](#引入及配置)
+        - [Redis使用](#redis使用)
+        - [Redis问题](#redis问题)
+        - [Redis问答](#redis问答)
+        - [Redis主从复制、哨兵、Cluster三种集群模式](#redis主从复制哨兵cluster三种集群模式)
+          - [主从复制模式](#主从复制模式)
+          - [Sentinel（哨兵）模式](#sentinel哨兵模式)
+          - [Cluster模式](#cluster模式)
+      - [Redis持久化](#redis持久化)
+      - [Redis应用场景](#redis应用场景)
+      - [Redis设计思想](#redis设计思想)
+- [ElasticSearch](#elasticsearch-1)
+      - [安装](#安装)
+        - [windows](#windows)
+- [Zookeeper](#zookeeper)
+      - [集群搭建](#集群搭建)
+      - [Zookeeper启动](#zookeeper启动)
+- [Mongodb](#mongodb)
+- [RabbitMQ](#rabbitmq)
+- [Kafka](#kafka)
+  - [**Kafka群集部署**](#kafka群集部署)
+  - [**Kakfa的设计思想**](#kakfa的设计思想)
+        - [如何保证百万级写入速度：](#如何保证百万级写入速度)
+          - [页缓存技术 + 磁盘顺序写 +零拷贝技术](#页缓存技术--磁盘顺序写-零拷贝技术)
+        - [Kafka如何做到不丢失不重复消费](#kafka如何做到不丢失不重复消费)
+          - [**kafka的消息传递机制**](#kafka的消息传递机制)
+        - [幂等的producer](#幂等的producer)
+- [SpringCloud](#springcloud)
+- [Hadoop/Spark](#hadoopspark)
+- [互联网工具](#互联网工具)
+      - [Jenkins](#jenkins)
+      - [Git](#git)
+      - [Maven](#maven)
+      - [Nginx](#nginx)
+      - [Docker](#docker)
+- [Java基础](#java基础)
+  - [基础问题](#基础问题)
+  - [Java集合](#java集合)
+    - [HashMap](#hashmap)
+    - [ArrayList](#arraylist)
+    - [LinkedList](#linkedlist)
+    - [堆Heap](#堆heap)
+  - [ConcurrentHashMap](#concurrenthashmap)
+  - [容器](#容器)
+    - [同步容器](#同步容器)
+    - [并发容器](#并发容器)
+  - [枚举Enum](#枚举enum)
+- [多线程](#多线程)
+  - [锁](#锁-1)
+    - [锁原理](#锁原理)
+      - [volatile](#volatile)
+        - [JMM（JavaMemoryModel）](#jmmjavamemorymodel)
+        - [可见性的解决方案](#可见性的解决方案)
+          - [加锁](#加锁)
+          - [Volatile修饰共享变量](#volatile修饰共享变量)
+          - [应用](#应用)
+      - [**AQS**](#aqs)
+      - [**CAS**](#cas)
+      - [synchronized](#synchronized)
+        - [对象内存分布](#对象内存分布)
+        - [锁升级](#锁升级)
+          - [偏向锁](#偏向锁)
+          - [轻量级锁](#轻量级锁)
+          - [自旋锁](#自旋锁)
+      - [Lock](#lock)
+      - [ThreadLocal](#threadlocal)
+    - [锁类型](#锁类型-1)
+        - [乐观锁、悲观锁<a name = "乐观锁、悲观锁-头"></a>](#乐观锁悲观锁)
+        - [**自旋锁、适应性自旋锁**<a name = "自旋锁、适应性自旋锁-头"></a>](#自旋锁适应性自旋锁)
+        - [无锁、偏向锁、轻量级锁、重量级锁<a name ="无锁、偏向锁、轻量级锁、重量级锁"></a>](#无锁偏向锁轻量级锁重量级锁)
+        - [公平锁、非公平锁<a name ="公平锁、非公平锁-头"></a>](#公平锁非公平锁)
+        - [可重入锁、非可重入锁<a name = "可重入锁、非可重入锁-头"></a>](#可重入锁非可重入锁)
+        - [独享锁、共享锁<a name = "独享锁、共享锁-头"></a>](#独享锁共享锁)
+        - [互斥锁、自旋锁](#互斥锁自旋锁)
+        - [读写锁](#读写锁)
+    - [**锁优化**](#锁优化)
+  - [java.util.concurrent](#javautilconcurrent)
+    - [包基本内容](#包基本内容)
+    - [**atomic**](#atomic)
+    - [**locks**](#locks)
+        - [**ThreadPoolExecutor**<a name ="ThreadPoolExecutor-tail"></a>](#threadpoolexecutor)
+          - [**workQueue任务队列**](#workqueue任务队列)
+          - [RejectedExecutionHandler拒绝策略](#rejectedexecutionhandler拒绝策略)
+          - [预定义线程池](#预定义线程池)
+    - [**collections**](#collections)
+    - [**tools**](#tools)
+      - [**CountDownLatch**<a name = "CountDownLatch-tail"></a>](#countdownlatch)
+      - [**CyclicBarrier**<a name = "CyclicBarrier-tail"></a>](#cyclicbarrier)
+      - [Semaphore<a name = "Semaphore-tail"></a>](#semaphore)
+    - [多线程使用示例](#多线程使用示例)
+      - [**实现ABC交叉打印**](#实现abc交叉打印)
+        - [Synchronized同步法](#synchronized同步法)
+        - [Lock锁方法](#lock锁方法)
+        - [ReentrantLock结合Condition](#reentrantlock结合condition)
+        - [Semaphore信号量方式](#semaphore信号量方式)
+- [事务](#事务-1)
+  - [事务的特性（ACID）](#事务的特性acid)
+- [JVM](#jvm)
+  - [JVM整体架构](#jvm整体架构)
+    - [类加载器子系统](#类加载器子系统)
+      - [**类加载器ClassLoader加载**](#类加载器classloader加载)
+      - [**链接**](#链接)
+      - [**初始化**](#初始化)
+    - [Java运行时数据区](#java运行时数据区)
+    - [执行引擎](#执行引擎)
+    - [常见问题](#常见问题)
+  - [**JMM Java内存模型**](#jmm-java内存模型)
+  - [**GC垃圾回收**](#gc垃圾回收)
+    - [GC参数](#gc参数)
+  - [常用JVM配置参数](#常用jvm配置参数)
+  - [性能监控工具](#性能监控工具)
+    - [命令](#命令)
+- [分布式](#分布式)
+  - [分布式锁与分布式事务](#分布式锁与分布式事务)
+    - [分布式锁](#分布式锁)
+        - [基于缓存实现分布式锁](#基于缓存实现分布式锁)
+          - [Redis](#redis-1)
+- [数据结构和算法](#数据结构和算法)
+  - [排序](#排序)
+    - [冒泡排序](#冒泡排序)
+    - [快速排序](#快速排序)
+    - [归并排序](#归并排序)
+    - [插入排序](#插入排序)
+    - [希尔排序](#希尔排序)
+    - [堆排序](#堆排序)
+    - [桶排序](#桶排序)
+    - [基数排序](#基数排序)
+  - [算法](#算法)
+- [计算机网络](#计算机网络)
+- [IDEA](#idea)
+  - [快捷键](#快捷键)
+- [实用工具](#实用工具)
+  - [文档编辑](#文档编辑)
+    - [Typora](#typora)
+- [技能](#技能)
 # **Linux**
 
 ### Java开发环境
@@ -7768,7 +8054,7 @@ public class ABC_Semaphore {
 
 [classloader加载class文件的原理和机制](https://www.jianshu.com/p/52c38cf2e3d4)
 
-## JVM整体架构：
+## JVM整体架构
 
 ![img](https://upload-images.jianshu.io/upload_images/1833901-3a7aa00aa498d8e3.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200)
 
@@ -7784,7 +8070,7 @@ JVM被分为三个主要的子系统
 
 Java的动态类加载功能是由类加载器子系统处理。当它在**运行时**（不是编译时）首次引用一个类时，它加载、链接并初始化该类文件。
 
-#### **1. 类加载器ClassLoader加载**
+#### **类加载器ClassLoader加载**
 
 1. **启动类加载器(BootStrap class Loader)**
 
@@ -7806,7 +8092,7 @@ Java的动态类加载功能是由类加载器子系统处理。当它在**运�
 
 
 
-#### **2. 链接**
+#### **链接**
 
 - 验证
 
@@ -7824,7 +8110,7 @@ Java的动态类加载功能是由类加载器子系统处理。当它在**运�
 
 
 
-#### **3. 初始化**
+#### **初始化**
 
 这是类加载的最后阶段，这里所有的**静态变量会被赋初始值**, 并且**静态块将被执行。**
 
@@ -7892,7 +8178,7 @@ C、Class文件中除了存有类的版本、字段、方法、接口等描述�
 
 
 
-### 常见问题：
+### 常见问题
 
 **Java中new一个对象的步骤：**
 
@@ -7909,7 +8195,7 @@ C、Class文件中除了存有类的版本、字段、方法、接口等描述�
 
 
 
-## **JMM Java内存模型：**
+## **JMM Java内存模型**
 
 1、 Java的并发采用“共享内存”模型，线程之间通过读写内存的公共状态进行通讯。**多个线程之间是不能通过直接传递数据交互的，它们之间交互只能通过共享变量实现。**
 2、 主要目的是定义程序中各个变量的访问规则。
@@ -7948,7 +8234,7 @@ Java堆的内存划分如图所示，分别为年轻代、Old Memory（老年代
 
 
 
-## **GC垃圾回收：**
+## **GC垃圾回收**
 
 一、 判断对象是否要回收的方法：可达性分析法
 1、 **可达性分析法**：通过一系列“GC Roots”对象作为起点进行搜索，如果在“GC Roots”和一个对象之间没有可达路径，则称该对象是不可达的。不可达对象不一定会成为可回收对象。进入DEAD状态的线程还可以恢复，GC不会回收它的内存。（把一些对象当做root对象，JVM认为root对象是不可回收的，并且root对象引用的对象也是不可回收的）
@@ -8111,7 +8397,7 @@ B、执行Minor GC操作的时候，不会影响到永久代（Tenured）。从�
 
 ## 性能监控工具
 
-### 命令：
+### 命令
 
 uptime
 
