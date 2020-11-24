@@ -1,12 +1,8 @@
-
-
-
-
-
-
-
-
 # 				总结
+
+[TOC]
+
+
 
 [TOC]
 
@@ -671,9 +667,9 @@ DispatcherServlet 将会使用视图解析器（view resolver）来将逻辑视�
 
 
 
-#### 整合其他框架
+### 整合其他框架
 
-##### ElasticSearch 
+#### ElasticSearch 
 
 > 地址：[mall-learning项目](http://www.macrozheng.com/#/architect/mall_arch_07?id=%E5%9C%A8pomxml%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96)
 
@@ -4669,7 +4665,7 @@ cd /usr/local/apache-zookeeper-3.6.2-bin/conf
 
 **[从面试角度一文学完 Kafka](https://mp.weixin.qq.com/s/QF9b9vpncLS24xMzFkanTQ)**    
 
-##### [**Kafka群集部署**](https://blog.51cto.com/14227204/2493049)
+## [**Kafka群集部署**](https://blog.51cto.com/14227204/2493049)
 
 **[kafka环境搭建2-broker集群+zookeeper集群](https://www.jianshu.com/p/dc4770fc34b6)**
 
@@ -4710,7 +4706,7 @@ port=9094
 
 分区：
 
-#### **Kakfa的设计思想**  
+## **Kakfa的设计思想**  
 
 [Kafka如何保证百万级写入速度以及保证不丢失不重复消费](https://www.cnblogs.com/gxyandwmm/p/11432598.html)
 
@@ -4899,7 +4895,7 @@ consumer端由于可能无法消费事务中所有消息，并且消息可能被
 
 # Java基础
 
-### 基础问题
+## 基础问题
 
 **[1.java项目中的classpath到底是什么](https://segmentfault.com/a/1190000015802324)**
 
@@ -4915,7 +4911,7 @@ Ps：（快速记忆法）当前对象与后一个对象进行比较，如果比
 
 
 
-### Java集合
+## Java集合
 
 ![img](https://img2018.cnblogs.com/blog/1362965/201901/1362965-20190118094735724-2129767713.png)
 
@@ -4952,7 +4948,7 @@ Ps：（快速记忆法）当前对象与后一个对象进行比较，如果比
 
 
 
-#### HashMap
+### HashMap
 
 **原理**：通过计算key的hash值，对数组长度取余后得到下标，找到table数组对应下标，如果此槽为null，则放入；否则，进行比较：如果此时槽内hash值与key的hash相等并且key值相等（==或equals）,则替换；否则放入链表或者红黑树。
 
@@ -5059,7 +5055,7 @@ d. 建立公共溢出区：将哈希表分为基本表和溢出表，发生冲�
 
 
 
-#### ArrayList
+### ArrayList
 
 > ArrayList有用过吗？它是一个什么东西？可以用来干嘛？
 
@@ -5166,11 +5162,11 @@ Vector的实现很简单，就是把所有的方法统统加上synchronized就�
 
 1. [原创 |《吊打面试官》系列-ArrayList](https://mp.weixin.qq.com/s/WoGclm7SsbURGigI3Mwr3w)                
 
-#### LinkedList
+### LinkedList
 
 
 
-#### 堆Heap
+### 堆Heap
 
 堆其实就是一种特殊的队列——优先队列。
 
@@ -5243,7 +5239,7 @@ heap 其实有很多种实现方式，比如 binomial heap, Fibonacci heap 等�
 
 
 
-### ConcurrentHashMap
+## ConcurrentHashMap
 
 > HashMap在多线程环境下存在线程安全问题，那你一般都是怎么处理这种情况的？
 
@@ -5388,9 +5384,9 @@ ConcurrentHashMap在进行put操作的还是比较复杂的，大致可以分为
 
 2. [我就知道面试官接下来要问我 ConcurrentHashMap 底层原理了](https://mp.weixin.qq.com/s/My4P_BBXDnAGX1gh630ZKw)                
 
-### 容器
+## 容器
 
-#### 同步容器
+### 同步容器
 
 在Java中，同步容器主要包括2类：
 
@@ -5455,7 +5451,7 @@ for (int i = 0; i < v.size(); i++) {
 
 
 
-#### 并发容器
+### 并发容器
 
 针对前文提到的同步容器存在的并发度低问题，从Java5开始，java.util.concurent包下，提供了大量支持高效并发的访问的集合类，我们称之为并发容器。
 
@@ -5481,7 +5477,7 @@ CopyOnWriteArrayList中add/remove等写方法是需要加锁的，而读方法�
 
 
 
-### 枚举Enum
+## 枚举Enum
 
 参考：
 
@@ -7709,7 +7705,7 @@ public class ABC_Semaphore {
 
 # 事务
 
-### 事务的特性（ACID）
+## 事务的特性（ACID）
 
 - **原子性(`Atomicity`)**：事务是不可分割的工作单元，要么都成功，要么都失败， 如果事务中一个sql语句执行失败，则已执行的语句也必须回滚，数据库退回到事务前的状态。
 - **一致性(`Consistency`)**：事务不能破坏数据的完整性和业务的一致性 。例如在银行转账时，不管事务成功还是失败，双方钱的总额不变
@@ -8024,7 +8020,7 @@ B、执行Minor GC操作的时候，不会影响到永久代（Tenured）。从�
 
 
 
-##### GC参数
+### GC参数
 
 - 串行回收器
 
@@ -8123,7 +8119,7 @@ B、执行Minor GC操作的时候，不会影响到永久代（Tenured）。从�
 
 ## 性能监控工具
 
-###### 命令：
+### 命令：
 
 uptime
 
@@ -8149,9 +8145,9 @@ JConsole
 
 # 分布式
 
-### 分布式锁与分布式事务
+## 分布式锁与分布式事务
 
-#### 分布式锁
+### 分布式锁
 
 针对分布式锁，目前有以下几种实现方案（From: http://www.hollischuang.com/a...）
 
@@ -8285,9 +8281,9 @@ Redisson普通的锁实现源码主要是**RedissonLock**这个类。
 
 
 
-### 排序
+## 排序
 
-#### 冒泡排序
+### 冒泡排序
 
 ```java
 private static void bubbleSort(int[] array) {
@@ -8305,7 +8301,7 @@ private static void bubbleSort(int[] array) {
 }
 ```
 
-#### 快速排序
+### 快速排序
 
 **挖坑填数法**
 
@@ -8363,7 +8359,7 @@ private static void quickSort(int[] arr, int start, int end) {
     }
 ```
 
-#### 归并排序
+### 归并排序
 
 思路：采用分治的思想，将大问题分区，分区结束后再合并时排序，这样合并完成之后数组有序，往上合并后仍有序。也就是先拆，拆到不可再分之后再合。所有栈都在等待merge调用。而merge函数所作的事就是合起来排序。
 
@@ -8417,7 +8413,7 @@ private static void mergeSort(int[] arr) {
     }
 ```
 
-#### 插入排序
+### 插入排序
 
 ```java
 private static void insertSort(int[] arr) {
@@ -8439,7 +8435,7 @@ private static void insertSort(int[] arr) {
 }
 ```
 
-#### 希尔排序
+### 希尔排序
 
 [图解](https://www.cnblogs.com/chengxiao/p/6104371.html)
 
@@ -8469,7 +8465,7 @@ private static void insertSort(int[] arr) {
 
 
 
-#### 堆排序
+### 堆排序
 
 **[图解](https://www.cnblogs.com/chengxiao/p/6129630.html)**
 
@@ -8517,7 +8513,7 @@ private static void heapSort(int[] arr) {
 
 
 
-#### 桶排序
+### 桶排序
 
 **算法过程**
 
@@ -8568,7 +8564,7 @@ private static void buckedSort(int[] arr) {
 
 
 
-#### 基数排序
+### 基数排序
 
 原理：
 类似桶排序,这里总是需要10个桶,多次使用
@@ -8624,7 +8620,7 @@ private static void buckedSort(int[] arr) {
 
 
 
-### 算法
+## 算法
 
 **分治思想**
 
@@ -8684,7 +8680,7 @@ TCP 进行断开连接的目标是：回收资源、终止数据传输。由于 
 
 # IDEA
 
-### 快捷键
+## 快捷键
 
 查看接口实现：ctrl + h 
 
@@ -8694,9 +8690,9 @@ TCP 进行断开连接的目标是：回收资源、终止数据传输。由于 
 
 # 实用工具
 
-### 文档编辑
+## 文档编辑
 
-#### Typora 
+### Typora 
 
 Markdown编辑器
 
